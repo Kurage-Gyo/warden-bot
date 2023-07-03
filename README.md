@@ -27,8 +27,8 @@ List the key features and functionalities of your project. Include a brief descr
 - Feature 3: Description
 
 ## Tutorial
-
-Step by step coding tutorial for ubuntu linux
+<details>
+<summary> Step by step coding tutorial for ubuntu linux </summary>
 
 1. Create a python venv (Virtual Environment)
 - Create directory in your home directory to store all venvs: 
@@ -44,9 +44,38 @@ Step by step coding tutorial for ubuntu linux
 `mkdir warden-bot`
 - Save your environment's requirements to a file:
 `pip freeze > requirements.txt`
+2. Build the simple bot
+- Go to your venv directory and open .env file
+`vi .env`
+add the following lines 
+    - Replace Y0UR.DISCORD-.TOKEN-FROM-DISCORD with your discord token
+    - Replace YOURGUILDID with your server's (guild) id
+```
+DISCORD_TOKEN=Y0UR.DISCORD-.TOKEN-FROM-DISCORD
+GUILD_ID=YOURGUILDID
+```
+- Create file to start coding and open it using editor of your choice:
+`touch warden.py`
+`vi warden.py`
+- Add the following imports 
+```
+import discord # import discord.py library
+import os # to get token from .env file
+```
+- Retrieve the Discord API token and your guild from environment variables
+```
+load_dotenv()
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN') 
+GUILD_ID = os.getenv('GUILD_ID') #discord.Object(id=gggguuuuiiillldddID)
+```
+- Add the discord's intents
+```
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
+```
 
-
-
+> Still much to do... :)
+</details>
 
 ## Installation
 
