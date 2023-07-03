@@ -77,6 +77,34 @@ GUILD_ID = os.getenv('GUILD_ID') #discord.Object(id=gggguuuuiiillldddID)
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 ```
+- Example code
+```
+import discord
+import os
+from dotenv import load_dotenv
+
+load_dotenv() #load dotenv variables
+discord_token = os.getenv('DISCORD_TOKEN')
+discord_guild = os.getenv('DISCORD_GUILD')
+
+class MyClient(discord.Client):
+    def __init__(self, intents):
+        super().__init__(intents=intents)
+    async def on_ready(self):
+        print(f"Logged in as { self.user.name } (ID:{ self.user.id })")
+        print(f"discord.py API version: { discord.__version__ }")
+        print(f"------------------------------------------------")
+        print(f"Setting {self.user.name}'s status to { 'do not disturb','r' }")
+
+        await self.change_presence(status=discord.Status.dnd)
+
+intents = discord.Intents.default()
+intents.message_content = True
+intents.voice_states = True
+
+client = MyClient(intents=intents)
+client.run(discord_token)
+```
 
 > Still much to do... :)
 </details>
@@ -89,7 +117,7 @@ Step-by-step instructions on how to install and set up your project. Include any
 2. Step 2: Install the dependencies: `pip install -r requirements.txt`
 3. Step 3: Set up the required API credentials. Refer to the documentation for each API used.
 4. Step 4: Configure the bot token and other settings in the .env file.
-5. Step 5: Start the bot: `python bot.py`
+5. Step 5: Start the bot: `python warden.py`
 
 ## Usage
 
