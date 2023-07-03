@@ -8,6 +8,7 @@ Please note that Warden is primarily intended for testing purposes and may not h
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Tutorial](#tutorial)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -24,6 +25,28 @@ List the key features and functionalities of your project. Include a brief descr
 - Feature 1: Description
 - Feature 2: Description
 - Feature 3: Description
+
+## Tutorial
+
+Step by step coding tutorial for ubuntu linux
+
+1. Create a python venv (Virtual Environment)
+- Create directory in your home directory to store all venvs: 
+`mkdir ~/.venvs`
+- Create venv using python: 
+`python3 -m venv ~/.venvs/discord`
+- Before installing requirements, activate the venv 
+`source ~/.venvs/discord/bin/activate`
+- Your prompt should look like this now: "(discord) user@host:~$"
+- You can now install requirements using:
+`pip install discord.py`
+- Create directory to contain project's files & go into created directory:
+`mkdir warden-bot`
+- Save your environment's requirements to a file:
+`pip freeze > requirements.txt`
+
+
+
 
 ## Installation
 
