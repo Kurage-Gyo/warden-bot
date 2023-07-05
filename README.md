@@ -54,8 +54,8 @@ add the following lines
     - Replace Y0UR.DISCORD-.TOKEN-FROM-DISCORD with your discord token
     - Replace YOURGUILDID with your server's (guild) id
 ```
-DISCORD_TOKEN=Y0UR.DISCORD-.TOKEN-FROM-DISCORD
-GUILD_ID=YOURGUILDID
+DISCORD_TOKEN=Y0UR.DISCORD-.TOKEN-HERE-EEEE!
+DISCORD_GUILD=YOURGUILDIDHERE
 ```
 - Create file to start coding and open it using editor of your choice:
 `touch warden.py`
@@ -95,7 +95,6 @@ class MyClient(discord.Client):
         print(f"discord.py API version: { discord.__version__ }")
         print(f"------------------------------------------------")
         print(f"Setting {self.user.name}'s status to { 'do not disturb','r' }")
-
         await self.change_presence(status=discord.Status.dnd)
 
 intents = discord.Intents.default()
