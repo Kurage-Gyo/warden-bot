@@ -6,13 +6,15 @@ Please note that Warden is primarily intended for testing purposes and may not h
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Tutorial](#tutorial)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Warden discord.py bot](#warden-discordpy-bot)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Tutorial](#tutorial)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Introduction
 
@@ -27,9 +29,29 @@ List the key features and functionalities of your project. Include a brief descr
 - Feature 3: Description
 
 ## Tutorial
+
+
+
+
 <details>
 
-<summary> Step by step coding tutorial for ubuntu linux </summary>
+
+
+<summary> Prerequisite </summary>                      
+- Install the following: 
+
+ ```
+ sudo apt install python3
+ sudo apt install python3-pip
+ sudo apt install python3.10-venv
+ ```
+
+</details>
+
+
+<details>
+
+<summary> Step by step coding tutorial for ubuntu (wsl) </summary>
 
 1. Create a python venv (Virtual Environment)
 - Create directory in your home directory to store all venvs: 
@@ -46,8 +68,8 @@ List the key features and functionalities of your project. Include a brief descr
 `mkdir warden-bot`
 - Save your environment's requirements to a file:
 `pip freeze > requirements.txt`
-2. Build the simple bot
-- Go to your venv directory then create and open .env file
+1. Build the simple bot
+- Go to your projekct directory then create and open .env file
 `touch .env`
 `vi .env`
 add the following lines 
