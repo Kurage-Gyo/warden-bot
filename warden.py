@@ -3,14 +3,21 @@ import os
 import random
 import asyncio
 import re
+from discord import app_commands
 from dotenv import load_dotenv
+
 
 load_dotenv() #load dotenv variables
 discord_token = os.getenv('DISCORD_TOKEN')
-discord_guild = os.getenv('DISCORD_GUILD')
+discord_guild = discord.Object(os.getenv('DISCORD_GUILD')) #get variable, set the id as discord.Object
 class MyClient(discord.Client):
     def __init__(self, intents):
         super().__init__(intents=intents)
+        self.tree = app_commands.CommandTree(self) #init command tree
+    async def setup_hook(self): 
+        # This copies the global commands over to specified guild.
+        self.tree.copy_global_to(guild=discord_guild)
+        await self.tree.sync(guild=discord_guild)
     async def on_ready(self):
         print(f"Logged in as { self.user.name } (ID:{ self.user.id })")
         print(f"discord.py API version: { discord.__version__ }")
@@ -29,4 +36,12 @@ intents.message_content = True
 intents.voice_states = True
 
 client = MyClient(intents=intents)
+
+@client.tree.command()
+@app_commands.describe(message='The message you want me to repeat')
+async def say(interaction: discord.Interaction, message: str):
+    """Repeats what you say"""
+    await interaction.response.send_message(f'*{message}*') #Repeats given message 
+
+
 client.run(discord_token)
