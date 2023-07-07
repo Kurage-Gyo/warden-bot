@@ -182,6 +182,7 @@ async def say(interaction: discord.Interaction, message: str):
     await interaction.response.send_message(f'*{message}*') #Repeats given message 
 ```
 > Still much to do... :)
+</details>
 ## Installation
 
 Step-by-step instructions on how to install and set up your project. Include any dependencies or prerequisites that need to be installed beforehand.
