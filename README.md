@@ -68,7 +68,7 @@ List the key features and functionalities of your project. Include a brief descr
 `mkdir warden-bot`
 - Save your environment's requirements to a file:
 `pip freeze > requirements.txt`
-1. Build the simple bot
+2. Set up basic working tempalte
 - Go to your projekct directory then create and open .env file
 `touch .env`
 `vi .env`
@@ -91,15 +91,33 @@ from dotenv import load_dotenv
 - Retrieve the Discord API token and your guild from environment variables
 ```
 load_dotenv()
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN') 
-GUILD_ID = os.getenv('GUILD_ID') #discord.Object(id=gggguuuuiiillldddID)
+discord_token = os.getenv('DISCORD_TOKEN')
+discord_guild = discord.Object(os.getenv('DISCORD_GUILD')) #get variable, set the id as discord.Object
 ```
 - Add the discord's intents
 ```
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 ```
-- Example code
+
+- Set up all needed intents: 
+```
+intents = discord.Intents.default()
+intents.message_content = True
+```
+- Create `MyClient` instance and run using token
+```
+client = MyClient(intents=intents)
+
+```
+
+<details>
+
+<summary>
+Example code so far
+
+</summary>
+
 ```
 import discord
 import os
@@ -126,10 +144,44 @@ intents.voice_states = True
 client = MyClient(intents=intents)
 client.run(discord_token)
 ```
-
-> Still much to do... :)
 </details>
 
+3. Create a simple bot
+- Set bot to reply to message 
+```
+async def on_message(self, message):
+        if message.author.id == self.user.id: # we do not want the bot to reply to itself
+            return
+        if message.content.startswith('!hello'): # checks if message starts with !hello
+            await message.channel.send(f'Hello, {message.author.mention}. I, the {self.user.mention} bot says hi!')
+```
+Now whenever someone starts their message with `!hello` bot will send the following message:
+> Hello, @USERNAME. I, the @BOTNAME bot says hi!
+- Set up handling slash `/` commands
+```
+from discord import app_commands
+```
+- Add the following line in MyClient class in the `__init__ ` function
+```
+self.tree = app_commands.CommandTree(self) #init command tree
+```
+- Before `on_ready` funcion add the following funcion `setup_hook`
+```
+async def setup_hook(self): 
+        # This copies the global commands over to specified guild.
+        self.tree.copy_global_to(guild=discord_guild)
+        await self.tree.sync(guild=discord_guild)
+```
+Now you're ready to register slash commands `/`
+- The following registers `say` command that repeats given text, it takes one argument
+```
+@client.tree.command()
+@app_commands.describe(message='The message you want me to repeat')
+async def say(interaction: discord.Interaction, message: str):
+    """Repeats what you say"""
+    await interaction.response.send_message(f'*{message}*') #Repeats given message 
+```
+> Still much to do... :)
 ## Installation
 
 Step-by-step instructions on how to install and set up your project. Include any dependencies or prerequisites that need to be installed beforehand.
